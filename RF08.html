@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Funcionários</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="RF08style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="Logo" width="110" height="70" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.html">
+                            <i class="fas fa-home nav-icon"></i> 
+                            <span class="nav-text">Home</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF03.html">
+                            <i class="fas fa-clock nav-icon"></i>
+                            <span class="nav-text">Agendar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF02.html">
+                            <i class="fas fa-syringe nav-icon"></i> 
+                            <span class="nav-text">Procedimentos</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF07.html">
+                            <i class="fas fa-dollar-sign nav-icon"></i> 
+                            <span class="nav-text">Pagamentos</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF04.html">
+                            <i class="fas fa-book nav-icon"></i> 
+                            <span class="nav-text">Prontuários</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="relatorios.html">
+                            <i class="fas fa-chart-bar nav-icon"></i> 
+                            <span class="nav-text">Relatórios</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF05.html">
+                            <i class="fas fa-calendar-alt nav-icon"></i> 
+                            <span class="nav-text">Calendário</span> 
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF08.html">
+                            <i class="fas fa-users nav-icon"></i> 
+                            <span class="nav-text">Funcionários</span> 
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="card-name">
+            <h2 class="text-center">Gerenciamento de Funcionários</h2>
+        </div>
+        <button class="btn btn-transparent" data-bs-toggle="modal" data-bs-target="#modalFuncionario">Cadastrar Novo Funcionário</button>
+    
+        <div class="row mt-4" id="funcionarios"></div>
+
+        <div class="modal fade" id="modalFuncionario" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered"> 
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Cadastrar/Editar Funcionário</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="employeeForm">
+                            <input type="hidden" id="employeeId">
+                            <div class="form-group">
+                              <label for="employeeName">Nome</label>
+                              <input type="text" id="employeeName" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="employeeRole" class="form-label">Cargo:</label>
+                                <select class="form-select" id="employeeRole" required>
+                                    <option value="Funcionário">Funcionário</option>
+                                    <option value="Administrador">Administrador</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                              <label for="employeePassword">Senha</label>
+                              <input type="password" id="employeePassword" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                          </form>
+                          
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalConfirmarDeletar" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Confirmar</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Você tem certeza de que deseja deletar este funcionário?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-danger" id="confirmarDeletar">Deletar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="footer-text">© 2024 Clínica de Estética. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="RF08.js"></script>
+</body>
+</html>

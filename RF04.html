@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manutenção de Prontuários</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="RF04style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="Logo" width="110" height="70" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-home nav-icon"></i> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="RF03.html"><i class="fas fa-clock nav-icon"></i> Agendar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="RF02.html"><i class="fas fa-syringe nav-icon"></i> Procedimentos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="RF07.html"><i class="fas fa-dollar-sign nav-icon"></i> Pagamentos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="RF04.html"><i class="fas fa-book nav-icon"></i> Prontuários</a></li>
+                    <li class="nav-item"><a class="nav-link" href="relatorios.html"><i class="fas fa-chart-bar nav-icon"></i> Relatórios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="RF05.html"><i class="fas fa-calendar-alt nav-icon"></i> Calendário</a></li>
+                    <li class="nav-item"><a class="nav-link" href="RF08.html"><i class="fas fa-users nav-icon"></i> Funcionários</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="card-name">
+            <h2 class="text-center">Prontuários</h2>
+        </div>
+
+     <!-- Botão e Barra de Pesquisa separados -->
+<div class="my-3">
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRecordModal">
+        Cadastrar Novo Prontuário
+    </button>            
+</div>
+
+<!-- Barra de pesquisa com ícone ampliado -->
+<div class="input-group w-100">
+    <input type="text" id="searchBar" class="form-control" placeholder="Pesquisar por nome do cliente">
+    <span class="input-group-text search-icon" id="searchIcon" style="background-color: rgba(221,98,26,1); color: white;">
+        <i class="fas fa-search fa-lg"></i> <!-- Aumenta o ícone usando fa-lg -->
+    </span>
+</div>
+
+
+        <!-- Card de Prontuário com largura ajustada -->
+        <div id="recordsContainer" class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">João Silva</h5>
+                        <p class="card-text">Procedimento: Limpeza de Pele</p>
+                        <p class="card-text">Detalhes: Limpeza profunda para remoção de impurezas e rejuvenescimento da pele.</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addRecordModal">Editar</button>
+                        <button type="button" class="btn btn-danger open-delete-modal" data-bs-toggle="modal" data-bs-target="#modalConfirmarDeletar">Excluir</button>
+
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para cadastro de prontuário -->
+    <div class="modal fade" id="addRecordModal" tabindex="-1" aria-labelledby="addRecordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRecordModalLabel">Cadastrar Novo Prontuário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addRecordForm">
+                        <label for="clientName">Cliente:</label>
+                        <input type="text" id="clientName" name="clientName" class="form-control" required>
+
+                        <label for="procedure">Procedimento:</label>
+                        <input type="text" id="procedure" name="procedure" class="form-control" required>
+
+                        <label for="procedureDetails">Detalhes do Procedimento:</label>
+                        <textarea id="procedureDetails" name="procedureDetails" class="form-control" required></textarea>
+
+                        <button type="submit" class="btn btn-primary mt-3 w-100">Cadastrar Prontuário</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalConfirmarDeletar" tabindex="-1" aria-labelledby="modalConfirmarDeletarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalConfirmarDeletarLabel">Confirmar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Você tem certeza de que deseja deletar este cliente?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmar-deletar">Deletar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer mt-auto">
+        <div class="container text-center">
+            <p class="footer-text">© 2024 Clínica de Estética. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script src="RF04.js"></script>
+</body>
+</html>

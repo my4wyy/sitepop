@@ -1,0 +1,180 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  flex-grow: 1;
+  background: rgb(235,192,192);
+  background: linear-gradient(90deg, rgba(235,192,192,1) 37%, rgba(221,98,26,1) 87%);
+  font-family: 'Arial', sans-serif;
+}
+
+.navbar-custom {
+  background-color: rgba(221,98,26,0.95);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 0.5rem 1rem;
+}
+
+.navbar-custom .navbar-brand img {
+  width: 80px; /* Aumentar de 50px para 80px */
+  height: auto;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.navbar-custom .navbar-brand img:hover {
+  transform: scale(1.1);
+}
+
+.navbar-nav .nav-item {
+  position: relative;
+  margin: 0 5px;
+}
+
+.navbar-nav .nav-link {
+  color: #ffffff !important;
+  font-size: 16px;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-item.active .nav-link::after {
+  transform: scaleX(1);
+}
+
+.navbar-nav .nav-item.active .nav-link {
+  font-weight: bold;
+}
+
+.navbar-toggler {
+  border-color: #ffffff;
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.icon-funcionario {
+  font-size: 4rem;           
+  color: rgba(221,98,26,1);  /* Define a cor laranja */
+  margin-bottom: 15px;       /* Espaçamento abaixo do ícone */
+}
+
+.card {
+  max-width: 300px; /* Define a largura máxima do card */
+  margin: auto; /* Centraliza o card horizontalmente */
+}
+
+.card .card-body {
+  text-align: center;
+}
+
+.card .card-body i {
+  font-size: 5rem; /* Tamanho maior */
+  color: rgba(221, 98, 26, 1); /* Cor laranja */
+  margin-bottom: 10px; /* Espaçamento abaixo do ícone */
+}
+
+
+.footer {
+  background-color: rgba(221,98,26,1);
+  padding: 20px 0;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  margin-top: auto; /* Para garantir que ele fique no final da página */
+  position: relative; /* Coloque position: relative para evitar problemas de sobreposição */
+}
+
+.footer-text {
+  margin: 0;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.card-name {
+  background-color: rgba(221, 98, 26, 1); 
+  padding: 15px; 
+  border-radius: 15px; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+  max-width: 500px; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+h2.text-center {
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  margin: 0;
+}
+
+.btn-primary{
+  color: white !important;
+  background-color: rgba(221, 98, 26, 1) !important; /* Tom de laranja */
+  border: none;
+  margin: 10px;
+}
+
+.btn-transparent {
+  color: white !important;
+  background-color: rgba(221, 98, 26, 1) !important; /* Tom de laranja */
+  border: none !important;
+  padding: 10px 20px !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  border-radius: 5px !important;
+  transition: background-color 0.3s ease !important;
+}
+
+.btn-transparent:hover {
+  background-color: rgba(200, 88, 23, 1) !important; /* Tom de laranja mais escuro ao passar o mouse */
+}
+
+
+/* Adiciona margem inferior ao container de funcionários */
+#funcionarios {
+  margin-bottom: 10px; /* Ajuste para que o conteúdo não sobreponha o footer */
+}
+
+/* Botão Editar - Laranja */
+.btn-secondary {
+  background-color: rgba(221, 98, 26, 1) !important; /* Laranja */
+  color: white !important;
+  border: none !important;
+  transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(200, 88, 23, 1) !important; /* Laranja mais escuro */
+}
+
+.btn-danger {
+  background-color: #e5a6b6;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #d18d9c; 
+  color: white;
+}

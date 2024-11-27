@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observações internas</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="RF12style.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo.png" alt="Logo" width="110" height="70" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <i class="fas fa-home nav-icon"></i>
+                            <span class="nav-text">Home</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF03.html">
+                            <i class="fas fa-clock nav-icon"></i>
+                            <span class="nav-text">Agendar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF02.html">
+                            <i class="fas fa-syringe nav-icon"></i>
+                            <span class="nav-text">Procedimentos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF07.html">
+                            <i class="fas fa-dollar-sign nav-icon"></i>
+                            <span class="nav-text">Pagamentos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF04.html">
+                            <i class="fas fa-book nav-icon"></i>
+                            <span class="nav-text">Prontuários</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF06.html">
+                            <i class="fas fa-chart-bar nav-icon"></i>
+                            <span class="nav-text">Relatórios</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="RF05.html">
+                            <i class="fas fa-calendar-alt nav-icon"></i>
+                            <span class="nav-text">Calendário</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container my-5">
+        <div class="card-name">
+            <h2 class="text-center">Observações Internas</h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Observações Internas</h5>
+
+                        <div class="mb-3">
+                            <label for="observationType" class="form-label">Tipo de Observação:</label>
+                            <select id="observationType" class="form-select" onchange="loadOptions()">
+                                <option value="">Selecione o tipo</option>
+                                <option value="procedimento">Procedimento</option>
+                                <option value="consulta">Consulta</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="procedureType" class="form-label">Tipo de Procedimento/Consulta:</label>
+                            <select id="procedureType" class="form-select">
+                                <option value="">Selecione o procedimento/consulta</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="internalObservations" class="form-label">Observações:</label>
+                            <textarea id="internalObservations" class="form-control" rows="4"
+                                placeholder="Digite as observações internas aqui..."></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button class="btn btn-primary" onclick="saveInternalObservations()">Salvar
+                                Observações</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function loadOptions() {
+            const observationType = document.getElementById('observationType').value;
+            const procedureTypeSelect = document.getElementById('procedureType');
+
+            procedureTypeSelect.innerHTML = '<option value="">Selecione o procedimento/consulta</option>';
+
+            if (!observationType) return;
+
+          
+            const url = observationType === 'procedimento'
+                ? 'http://localhost:8080/procedimentos'
+                : 'http://localhost:8080/consultas/get-all';
+
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`Erro ${response.status}`);
+
+                const data = await response.json();
+
+
+                data.forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item.id;
+                    option.textContent = observationType === 'procedimento' ? item.nomeProcedimento : item.cliente;
+                    procedureTypeSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar as opções:', error);
+                alert('Erro ao carregar as opções. Tente novamente.');
+            }
+        }
+        async function saveInternalObservations() {
+    const observationType = document.getElementById('observationType').value;
+    const procedureType = document.getElementById('procedureType').value;
+    const observations = document.getElementById('internalObservations').value;
+
+    if (!observationType || !procedureType || observations.trim() === '') {
+        alert('Por favor, preencha todos os campos antes de salvar.');
+        return;
+    }
+
+    const url = observationType === 'procedimento'
+        ? `http://localhost:8080/procedimentos/${procedureType}/observacoes`
+        : `http://localhost:8080/consultas/${procedureType}/observacoes`;
+
+    const payload = { observacoes: observations };
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json' // Especifica JSON no cabeçalho
+            },
+            body: JSON.stringify(payload) // Converte o objeto para uma string JSON
+        });
+
+        if (response.ok) {
+            alert('Observações internas salvas com sucesso!');
+        } else {
+            throw new Error('Erro ao salvar as observações');
+        }
+    } catch (error) {
+        console.error('Erro ao salvar as observações:', error);
+        alert('Erro ao salvar as observações. Tente novamente.');
+    }
+}
+
+    </script>
+
+
+    <footer class="footer">
+        <div class="container text-center">
+            <p class="footer-text">© 2024 Clínica de Estética. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
