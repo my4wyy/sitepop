@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Função fetchConsultas no escopo global
     window.fetchConsultas = function(date) {
       console.log("fetchConsultas chamada com a data:", date);
-      fetch(`http://localhost:8080/consultas/data/${date}`)
+      fetch(`https://dbpop-tkqc.onrender.com/consultas/data/${date}`)
           .then(response => {
               console.log("Resposta recebida de fetchConsultas:", response);
               return response.json();
@@ -139,7 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const novoStatus = prompt("Digite o novo status: REALIZADA, PENDENTE, CANCELADA, REMARCADA");
       if (novoStatus) {
           console.log("Status a ser atualizado para:", novoStatus);
-          fetch(`http://localhost:8080/consultas/update-status/${consultaId}`, {
+          fetch(`https://dbpop-tkqc.onrender.com/consultas/update-status/${consultaId}`, {
               method: 'PUT',
               headers: {
                   'Content-Type': 'application/json',

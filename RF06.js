@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     console.log("Iniciando a busca de consultas...");
 
-    fetch('http://localhost:8080/consultas/get-all')
+    fetch('https://dbpop-tkqc.onrender.com/consultas/get-all')
         .then(response => {
             console.log("Resposta recebida do servidor:", response);
             if (!response.ok) {
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (consultaDate < today) {
                     console.log("Consulta é anterior a hoje:", consulta);
                     
-                    return fetch(`http://localhost:8080/procedimentos/${consulta.procedimento.id}`)
+                    return fetch(`https://dbpop-tkqc.onrender.com/procedimentos/${consulta.procedimento.id}`)
                         .then(procResponse => {
                             console.log("Resposta do procedimento:", procResponse);
 

@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para carregar os procedimentos do backend e preencher a lista de seleção
     function loadProcedimentos() {
         console.log("Iniciando carregamento dos procedimentos...");
-        fetch('http://localhost:8080/procedimentos')
+        fetch('https://dbpop-tkqc.onrender.com/procedimento')
             .then(response => response.json())
             .then(data => {
                 console.log("Procedimentos recebidos:", data);
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Envia os dados para o backend
         event.preventDefault();  // Impede o envio real
-        fetch('http://localhost:8080/consultas', {
+        fetch('https://dbpop-tkqc.onrender.com/consultas', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para carregar os agendamentos após o envio
     function loadAgendamentos() {
         console.log("Carregando agendamentos...");
-        fetch('http://localhost:8080/consultas/get-all')
+        fetch('https://dbpop-tkqc.onrender.com/consultas/get-all')
             .then(response => response.json())
             .then(agendamentos => {
                 console.log("Agendamentos recebidos:", agendamentos);

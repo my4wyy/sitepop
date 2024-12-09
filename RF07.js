@@ -5,7 +5,7 @@ $(document).ready(function () {
 
   // Função para buscar todos os procedimentos e armazená-los
   function carregarProcedimentos() {
-      return fetch('http://localhost:8080/procedimentos')
+      return fetch('https://dbpop-tkqc.onrender.com/procedimentos')
           .then(response => response.json())
           .then(data => {
               procedimentos = data; // Armazenar todos os procedimentos
@@ -72,7 +72,7 @@ $(document).ready(function () {
 
       console.log("Dados do pagamento a ser enviado:", pagamento);
 
-      fetch('http://localhost:8080/pagamentos', {
+      fetch('https://dbpop-tkqc.onrender.com/pagamentos', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'

@@ -4,7 +4,7 @@ $(document).ready(function () {
     let procedimentos = [];
 
     function carregarProcedimentos() {
-        return fetch('http://localhost:8080/procedimentos')
+        return fetch('https://dbpop-tkqc.onrender.com/procedimentos')
             .then(response => response.json())
             .then(data => {
                 procedimentos = data;
@@ -19,7 +19,7 @@ $(document).ready(function () {
     fetchAllProntuarios();
 
     function fetchAllProntuarios() {
-        fetch('http://localhost:8080/prontuarios/get-all')
+        fetch('https://dbpop-tkqc.onrender.com/prontuarios/get-all')
             .then(response => response.json())
             .then(data => {
                 console.log("Prontuários carregados:", data);
@@ -92,7 +92,7 @@ $(document).ready(function () {
             detalhesProcedimentos: [{ procedimentoId, detalhes: detalhesProcedimentos }]
         };
 
-        const url = editMode ? `http://localhost:8080/prontuarios/${editId}` : 'http://localhost:8080/prontuarios';
+        const url = editMode ? `https://dbpop-tkqc.onrender.com/prontuarios/${editId}` : 'https://dbpop-tkqc.onrender.com/prontuarios';
         const method = editMode ? 'PUT' : 'POST';
 
         fetch(url, {
@@ -117,7 +117,7 @@ $(document).ready(function () {
         editMode = true;
         editId = id;
 
-        fetch(`http://localhost:8080/prontuarios/${id}`)
+        fetch(`https://dbpop-tkqc.onrender.com/prontuarios/${id}`)
             .then(response => response.json())
             .then(data => {
                 $('#clientName').val(data.nomeCliente);
@@ -129,7 +129,7 @@ $(document).ready(function () {
 
     window.deleteRecord = function(id) {
         if (confirm("Você tem certeza de que deseja excluir este prontuário?")) {
-            fetch(`http://localhost:8080/prontuarios/${id}`, {
+            fetch(`https://dbpop-tkqc.onrender.com/prontuarios/${id}`, {
                 method: 'DELETE'
             }).then(response => {
                 if (response.ok) {
@@ -144,7 +144,7 @@ $(document).ready(function () {
     function searchProntuarios() {
         const query = $('#searchBar').val().trim();
 
-        fetch(`http://localhost:8080/prontuarios/search?nomeCliente=${query}`)
+        fetch(`https://dbpop-tkqc.onrender.com/prontuarios/search?nomeCliente=${query}`)
             .then(response => response.json())
             .then(data => {
                 displayProntuarios(data);

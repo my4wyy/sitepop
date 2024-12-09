@@ -6,7 +6,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
 
     console.log("Tentando login com usuário:", username); // Log do usuário
 
-    fetch("http://localhost:8080/login", {
+    fetch("https://dbpop-tkqc.onrender.com/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -28,7 +28,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
         console.log("Token recebido:", token); // Log do token recebido
         localStorage.setItem("token", token);
         alert("Login successful!");
-        window.location.href = "RF02.html";
+        window.location.href = "Index.html";
     })
     .catch(error => {
         console.error("Erro ao fazer login:", error); // Log de erro

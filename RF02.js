@@ -36,12 +36,23 @@ $(document).ready(function () {
 
     function loadProcedimentos() {
         console.log("Carregando procedimentos...");
-        fetch('http://localhost:8080/procedimentos')
+        fetch('https://dbpop-tkqc.onrender.com/procedimentos')
             .then(response => response.json())
             .then(data => {
                 console.log("Procedimentos carregados:", data);
                 $('#procedimentos').empty(); // Limpa a lista de procedimentos
                 data.forEach(procedimento => {
+                    // Remover possíveis objetos JSON antes da observação
+                    let observacaoLimpa = procedimento.observacoes;
+                    if (observacaoLimpa && observacaoLimpa.startsWith('{"observacoes":')) {
+                        try {
+                            observacaoLimpa = JSON.parse(observacaoLimpa).observacoes;
+                        } catch (e) {
+                            console.error('Erro ao parsear observação:', e);
+                            observacaoLimpa = 'Formato inválido';
+                        }
+                    }
+    
                     let procedimentoHtml = `
                         <div class="col-md-4 mb-4">
                             <div class="card">
@@ -50,7 +61,7 @@ $(document).ready(function () {
                                     <p class="card-text">Duração: ${procedimento.duracaoHoras || 0} horas e ${procedimento.duracaoMinutos || 0} minutos</p>
                                     <p class="card-text">Preço: R$ ${procedimento.preco ? parseFloat(procedimento.preco).toFixed(2) : '0,00'}</p>
                                     <p class="card-text">Materiais: ${procedimento.materiaisNecessarios || 'Não especificado'}</p>
-                                     <p class="card-text">Obs do Administrador: ${procedimento.observacoes || 'Não especificado'}</p>
+                                    <p class="card-text">Obs. do Administrador: ${observacaoLimpa || 'Não especificado'}</p>
                                     <button class="btn btn-secondary btn-editar" data-id="${procedimento.id}" data-bs-toggle="modal" data-bs-target="#modalProcedimento">Editar</button>
                                     <button class="btn btn-danger btn-deletar" data-id="${procedimento.id}" data-bs-toggle="modal" data-bs-target="#modalConfirmarDeletar">Deletar</button>
                                 </div>
@@ -63,6 +74,7 @@ $(document).ready(function () {
                 console.error('Erro ao carregar os procedimentos:', error);
             });
     }
+    
     
 
     // Carregar procedimentos na inicialização
@@ -94,7 +106,7 @@ $(document).ready(function () {
             console.log("Atualizando procedimento com ID:", id);
             // Atualizar procedimento (PUT)
             procedimentoData.id = id;
-            fetch(`http://localhost:8080/procedimentos/update`, {
+            fetch(`https://dbpop-tkqc.onrender.com/procedimentos/update`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
@@ -110,7 +122,7 @@ $(document).ready(function () {
         } else {
             console.log("Criando novo procedimento.");
             // Criar novo procedimento (POST)
-            fetch('http://localhost:8080/procedimentos', {
+            fetch('https://dbpop-tkqc.onrender.com/procedimentos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -130,7 +142,7 @@ $(document).ready(function () {
     $('#procedimentos').on('click', '.btn-editar', function () {
         let id = $(this).data('id');
         console.log("Carregando procedimento para edição, ID:", id);
-        fetch(`http://localhost:8080/procedimentos/${id}`)
+        fetch(`https://dbpop-tkqc.onrender.com/procedimentos/${id}`)
             .then(response => response.json())
             .then(data => {
                 console.log("Dados carregados para edição:", data);
@@ -164,7 +176,7 @@ $(document).ready(function () {
     $('#confirmar-deletar').on('click', function () {
         let id = $(this).data('id');
         console.log("Confirmando exclusão para ID:", id);
-        fetch(`http://localhost:8080/procedimentos/delete`, {
+        fetch(`https://dbpop-tkqc.onrender.com/procedimentos/delete`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

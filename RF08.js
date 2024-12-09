@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function carregarFuncionarios() {
-    fetch("http://localhost:8080/users")
+    fetch("https://dbpop-tkqc.onrender.com/users")
         .then(response => {
             console.log("Resposta recebida:", response);
             return response.json();
@@ -46,7 +46,7 @@ document.getElementById("employeeForm").addEventListener("submit", function (eve
     const password = document.getElementById("employeePassword").value;
     const user = { username, role, password };
 
-    const url = id ? `http://localhost:8080/users/${id}` : "http://localhost:8080/users/register";
+    const url = id ? `https://dbpop-tkqc.onrender.com/users/${id}` : "https://dbpop-tkqc.onrender.com/users/register";
     const method = id ? "PUT" : "POST";
 
     console.log("Enviando requisição para:", url);
@@ -78,7 +78,7 @@ document.getElementById("employeeForm").addEventListener("submit", function (eve
 
 function editarFuncionario(id) {
     console.log("Editando funcionário com ID:", id);
-    fetch(`http://localhost:8080/users/${id}`)
+    fetch(`https://dbpop-tkqc.onrender.com/users/${id}`)
         .then(response => response.json())
         .then(funcionario => {
             console.log("Funcionário encontrado:", funcionario);
@@ -102,7 +102,7 @@ function confirmarDeletar(id) {
 
 function deletarFuncionario(id) {
     console.log("Deletando funcionário com ID:", id);
-    fetch(`http://localhost:8080/users/${id}`, {
+    fetch(`https://dbpop-tkqc.onrender.com/users/${id}`, {
         method: "DELETE"
     })
         .then(response => response.text())
