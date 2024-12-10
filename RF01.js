@@ -28,7 +28,7 @@ document.getElementById("login-form").addEventListener("submit", function(event)
         console.log("Token recebido:", token); // Log do token recebido
         localStorage.setItem("token", token);
         alert("Login successful!");
-        window.location.href = "Index.html";
+        window.location.href = "RF00.html";
     })
     .catch(error => {
         console.error("Erro ao fazer login:", error); // Log de erro
